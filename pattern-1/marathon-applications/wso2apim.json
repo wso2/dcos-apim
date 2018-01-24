@@ -1,0 +1,107 @@
+{
+  "id": "wso2/apim",
+  "cmd": null,
+  "cpus": 1,
+  "mem": 2048,
+  "disk": 0,
+  "instances": 1,
+  "acceptedResourceRoles": [
+    "*"
+  ],
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "forcePullImage": false,
+      "image": "wso2am-dcos:2.1.0",
+      "parameters": [],
+      "privileged": false
+    },
+    "volumes": [
+      {
+        "containerPath": "/home/wso2carbon/wso2am-analytics-2.1.0/repository/conf/carbon.xml",
+        "hostPath": "/tmp/volumes/apim-analytics/repository/conf/carbon.xml",
+        "mode": "RW"
+      },
+      {
+        "containerPath": "/home/wso2carbon/wso2am-analytics-2.1.0/repository/conf/api-manager.xml",
+        "hostPath": "/tmp/volumes/apim-analytics/repository/conf/api-manager.xml",
+        "mode": "RW"
+      },
+      {
+        "containerPath": "/home/wso2carbon/wso2am-analytics-2.1.0/repository/conf/datasources/master-datasources.xml",
+        "hostPath": "/tmp/volumes/apim-analytics/repository/conf/datasources/master-datasources.xml",
+        "mode": "RW"
+      },
+      {
+        "containerPath": "/home/wso2carbon/wso2am-2.1.0/repository/components/lib/mysql-connector-java-5.1.34-bin.jar",
+        "hostPath": "/tmp/volumes/apim/repository/components/lib/mysql-connector-java-5.1.34-bin.jar",
+        "mode": "RW"
+      }
+    ],
+    "portMappings": [
+      {
+        "containerPort": 9763,
+        "hostPort": 0,
+        "labels": {
+          "VIP_0": "/wso2/apim:9763"
+        },
+        "name": "servlet-http",
+        "protocol": "tcp",
+        "servicePort": 9763
+      },
+      {
+        "containerPort": 9443,
+        "hostPort": 0,
+        "labels": {
+          "VIP_0": "/wso2/apim:9443"
+        },
+        "name": "servlet-https",
+        "protocol": "tcp",
+        "servicePort": 9443
+      },
+      {
+        "containerPort": 8280,
+        "hostPort": 0,
+        "labels": {
+          "VIP_0": "/wso2/apim:8280"
+        },
+        "name": "passthrough-http",
+        "protocol": "tcp",
+        "servicePort": 8280
+      },
+      {
+        "containerPort": 8243,
+        "hostPort": 0,
+        "labels": {
+          "VIP_0": "/wso2/apim:8243"
+        },
+        "name": "passthrough-https",
+        "protocol": "tcp",
+        "servicePort": 8243
+      }
+    ]
+  },
+  "healthChecks": [
+    {
+      "gracePeriodSeconds": 300,
+      "intervalSeconds": 60,
+      "maxConsecutiveFailures": 3,
+      "portIndex": 0,
+      "protocol": "TCP",
+      "timeoutSeconds": 20,
+      "delaySeconds": 15
+    }
+  ],
+  "labels": {
+    "HAPROXY_GROUP": "external",
+    "HAPROXY_1_VHOST": "wso2apim",
+    "HAPROXY_1_BACKEND_SERVER_OPTIONS": "server {serverName} {host_ipv4}:{port} {cookieOptions} check inter 5s ssl verify none",
+    "HAPROXY_3_VHOST": "wso2apim-gateway",
+    "HAPROXY_3_BACKEND_SERVER_OPTIONS": "server {serverName} {host_ipv4}:{port} {cookieOptions} check inter 5s ssl verify none"
+  },
+  "networks": [
+    {
+      "mode": "container/bridge"
+    }
+  ]
+}

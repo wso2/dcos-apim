@@ -1,0 +1,100 @@
+{
+  "id": "wso2/apim-analytics",
+  "cmd": null,
+  "cpus": 1,
+  "mem": 2048,
+  "disk": 0,
+  "instances": 1,
+  "acceptedResourceRoles": [
+    "*"
+  ],
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "forcePullImage": false,
+      "image": "wso2am-analytics-dcos:2.1.0",
+      "parameters": [],
+      "privileged": false
+    },
+    "volumes": [
+      {
+        "containerPath": "/home/wso2carbon/wso2am-analytics-2.1.0/repository/conf/carbon.xml",
+        "hostPath": "/tmp/volumes/apim-analytics/repository/conf/carbon.xml",
+        "mode": "RW"
+      },
+      {
+        "containerPath": "/home/wso2carbon/wso2am-analytics-2.1.0/repository/conf/datasources/master-datasources.xml",
+        "hostPath": "/tmp/volumes/apim-analytics/repository/conf/datasources/master-datasources.xml",
+        "mode": "RW"
+      },
+      {
+        "containerPath": "/home/wso2carbon/wso2am-analytics-2.1.0/repository/components/lib/mysql-connector-java-5.1.34-bin.jar",
+        "hostPath": "/tmp/volumes/apim-analytics/repository/components/lib/mysql-connector-java-5.1.34-bin.jar",
+        "mode": "RW"
+      }
+    ],
+    "portMappings": [
+      {
+        "containerPort": 9764,
+        "hostPort": 0,
+        "labels": {
+          "VIP_0": "/wso2/apim-analytics:9764"
+        },
+        "name": "servlet-http",
+        "protocol": "tcp",
+        "servicePort": 9764
+      },
+      {
+        "containerPort": 9444,
+        "hostPort": 0,
+        "labels": {
+          "VIP_0": "/wso2/apim-analytics:9444"
+        },
+        "name": "servlet-https",
+        "protocol": "tcp",
+        "servicePort": 9444
+      },
+      {
+        "containerPort": 7612,
+        "hostPort": 0,
+        "labels": {
+          "VIP_0": "/wso2/apim-analytics:7612"
+        },
+        "name": "thrift",
+        "protocol": "tcp",
+        "servicePort": 7612
+      },
+      {
+        "containerPort": 7712,
+        "hostPort": 0,
+        "labels": {
+          "VIP_0": "/wso2/apim-analytics:7712"
+        },
+        "name": "thrift-ssl",
+        "protocol": "tcp",
+        "servicePort": 7712
+      }
+    ]
+  },
+  "healthChecks": [
+    {
+      "gracePeriodSeconds": 300,
+      "intervalSeconds": 60,
+      "maxConsecutiveFailures": 3,
+      "portIndex": 0,
+      "protocol": "TCP",
+      "timeoutSeconds": 20,
+      "delaySeconds": 15
+    }
+  ],
+  "labels": {
+    "HAPROXY_GROUP": "external",
+    "HAPROXY_1_VHOST": "wso2apim-analytics",
+    "HAPROXY_1_BACKEND_SERVER_OPTIONS": "server {serverName} {host_ipv4}:{port} {cookieOptions} check inter 5s ssl verify none"
+  },
+  "networks": [
+    {
+      "mode": "container/bridge"
+    }
+  ]
+}
