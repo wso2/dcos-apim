@@ -10,5 +10,5 @@ This repository contains following resources required for deploying WSO2 API Man
 
   Marathon applications of each deployment pattern can be found in the relevant deployment pattern folder.
 
-  ## Supported DC/OS Version
-  v1.10
+## Supported DC/OS Version
+v1.10
