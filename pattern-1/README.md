@@ -32,24 +32,32 @@ into each DC/OS node and create below folders on those hosts:
 /volumes/wso2/apim-analytics
 ````
 
-6. Copy the content found in the [volumes](volumes/) folder into the above folders.
+6. Create a user group called ```wso2``` with the group id 200 on each DC/OS node 
+and change the group of above folder to ```wso2```:
 
-7. Install DC/OS CLI by following the instructions found in the 
+````bash
+groupadd --system -g 200 wso2
+chgrp -R wso2 /volumes/wso2
+````
+
+7. Copy the content found in the [volumes](volumes/) folder into the above folders.
+
+8. Install DC/OS CLI by following the instructions found in the 
 [DC/OS CLI Installation Guide](https://docs.mesosphere.com/1.10/cli/install/).
 
-8. Log into the DC/OS cluster by executing the below command:
+9. Log into the DC/OS cluster by executing the below command:
 
 ````bash
 dcos auth login
 ````
 
-9. Install Marathon load balancer by executing the below command:
+10. Install Marathon load balancer by executing the below command:
 
 ````bash
 dcos package install marathon-lb
 ````
 
-10. Once the Marathon load balancer becomes healthy install MySQL Marathon
+11. Once the Marathon load balancer becomes healthy install MySQL Marathon
 application by executing the below command:
 
 ````bash
@@ -60,14 +68,14 @@ Please note that this MySQL Marathon application is only intended for
 evaluation purposes and for enterprise deployments a production ready 
 RDBMS would need to be used.
 
-11. Once the MySQL Marathon application becomes healthy, install WSO2 
+12. Once the MySQL Marathon application becomes healthy, install WSO2 
 API Manager Analytics Marathon application by executing the below command:
 
 ````bash
 dcos marathon app add pattern-1/marathon-applications/wso2apim-analytics.json
 ````
 
-12. Once the WSO2 API Manager Analytics Marathon application becomes 
+13. Once the WSO2 API Manager Analytics Marathon application becomes 
 healthy install WSO2 API Manager Marathon application by executing 
 the below command:
 
@@ -75,11 +83,11 @@ the below command:
 dcos marathon app add pattern-1/marathon-applications/wso2apim.json
 ````
 
-13. Now find the IP address of the Marathon load balancer via the DC/OS 
+14. Now find the IP address of the Marathon load balancer via the DC/OS 
 CLI or UI and add an /etc/hosts entry in the local machine pointing the 
 hostname ```wso2apim``` for that IP address.
 
-14. Open a web browser and visit the WSO2 API Manager Publisher URL:
+15. Open a web browser and visit the WSO2 API Manager Publisher URL:
 
 ````bash
 https://wso2apim/publisher
