@@ -22,14 +22,15 @@ cp path/to/mysql-connector-java-5.1.34-bin.jar pattern-1/volumes/apim/repository
 cp path/to/mysql-connector-java-5.1.34-bin.jar pattern-1/volumes/apim-analytics/repository/components/lib/mysql-connector-java-5.1.34-bin.jar
 ````
 
-5. Mount a shared network volume to all DC/OS nodes and create three folders 
-for API-M, API-M Analytics and MySQL containers. If DC/OS Vagrant is used ssh 
+5. Mount a shared network volume to all DC/OS nodes and create four folders 
+for MySQL data, MySQL scripts, API-M, and API-M Analytics. If DC/OS Vagrant is used ssh 
 into each DC/OS node and create below folders on those hosts:
 
 ````bash
-/volumes/wso2/mysql
-/volumes/wso2/apim
-/volumes/wso2/apim-analytics
+/volumes/wso2/mysql-data # a blank folder for persisting MySQL data
+/volumes/wso2/mysql-scripts # provides MySQL scripts for creating WSO2 API-M and API-M Analytics databases
+/volumes/wso2/apim # provides configurations, extensions, and shares runtime artifacts of the API-M containers
+/volumes/wso2/apim-analytics # provides configurations, and extensions to the API-M Analytics containers
 ````
 
 6. Create a user group called ```wso2``` with the group id 200 on each DC/OS node 
