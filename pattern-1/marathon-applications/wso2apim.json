@@ -18,17 +18,17 @@
     },
     "volumes": [
       {
-        "containerPath": "/home/wso2carbon/wso2am-analytics-2.1.0/repository/conf/carbon.xml",
+        "containerPath": "/home/wso2carbon/wso2am-2.1.0/repository/conf/carbon.xml",
         "hostPath": "/volumes/wso2/apim-analytics/repository/conf/carbon.xml",
         "mode": "RW"
       },
       {
-        "containerPath": "/home/wso2carbon/wso2am-analytics-2.1.0/repository/conf/api-manager.xml",
+        "containerPath": "/home/wso2carbon/wso2am-2.1.0/repository/conf/api-manager.xml",
         "hostPath": "/volumes/wso2/apim-analytics/repository/conf/api-manager.xml",
         "mode": "RW"
       },
       {
-        "containerPath": "/home/wso2carbon/wso2am-analytics-2.1.0/repository/conf/datasources/master-datasources.xml",
+        "containerPath": "/home/wso2carbon/wso2am-2.1.0/repository/conf/datasources/master-datasources.xml",
         "hostPath": "/volumes/wso2/apim-analytics/repository/conf/datasources/master-datasources.xml",
         "mode": "RW"
       },
