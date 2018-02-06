@@ -18,7 +18,7 @@
         "type": "DOCKER",
         "volumes": [
             {
-                "containerPath": "/var/lib/mysql/data",
+                "containerPath": "/var/lib/mysql/",
                 "hostPath": "/volumes/wso2/mysql-data",
                 "mode": "RW"
             },
