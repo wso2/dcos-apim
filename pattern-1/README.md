@@ -85,8 +85,14 @@ dcos marathon app add pattern-1/marathon-applications/wso2apim.json
 ````
 
 14. Now find the IP address of the Marathon load balancer via the DC/OS 
-CLI or UI and add an /etc/hosts entry in the local machine pointing the 
-hostname ```wso2apim``` for that IP address.
+CLI or UI and add the following ```/etc/hosts``` entries in the local machine. 
+For an instance if the IP address of the Marathon load balancer is 
+```192.168.65.60```, ```/etc/hosts``` entries will need to be defined as follows:
+
+````bash
+192.168.65.60 wso2apim
+192.168.65.60 wso2apim-gateway
+````
 
 15. Open a web browser and visit the WSO2 API Manager Publisher URL:
 

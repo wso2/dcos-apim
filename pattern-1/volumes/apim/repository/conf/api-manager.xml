@@ -93,7 +93,7 @@
                 <!-- Admin password for the API gateway.-->
                 <Password>${admin.password}</Password>
                 <!-- Endpoint URLs for the APIs hosted in this API gateway.-->
-                <GatewayEndpoint>http://wso2apim-gw,https://wso2apim-gw</GatewayEndpoint>
+                <GatewayEndpoint>http://wso2apim-gateway,https://wso2apim-gateway</GatewayEndpoint>
             </Environment>
         </Environments>
     </APIGateway>
