@@ -33,15 +33,15 @@ into each DC/OS node and create below folders on those hosts:
 /volumes/wso2/apim-analytics # provides configurations, and extensions to the API-M Analytics containers
 ````
 
-6. Create a user group called ```wso2``` with the group id 200 on each DC/OS node 
+6. Copy the content found in the [volumes](volumes/) folder into the above folders.
+
+7. Create a user group called ```wso2``` with the group id 200 on each DC/OS node 
 and change the group of above folder to ```wso2```:
 
 ````bash
 groupadd --system -g 200 wso2
 chgrp -R wso2 /volumes/wso2
 ````
-
-7. Copy the content found in the [volumes](volumes/) folder into the above folders.
 
 8. Install DC/OS CLI by following the instructions found in the 
 [DC/OS CLI Installation Guide](https://docs.mesosphere.com/1.10/cli/install/).
