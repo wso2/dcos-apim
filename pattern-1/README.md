@@ -1,4 +1,4 @@
-# DC/OS Resources for WSO2 API Manager Deployment Pattern 1
+# DC/OS Resources for WSO2 API Manager <br/>Deployment Pattern 1
 
 ## Quick Start Guide
 
